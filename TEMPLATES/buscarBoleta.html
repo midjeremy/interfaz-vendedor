@@ -43,9 +43,6 @@
 </style>
 <body>
     <form method="post">
-        <label for="name">folio Boleta: </label>
-        <input type="text" id="folioBoleta" name="folioBoleta" required>
-
         <label for="email">Correo de usuario: </label>
         <input type="email" id="email" name="email" required>
 
@@ -54,6 +51,18 @@
         {% endif %}
 
         <button type="submit">Enviar Solicitud</button>
+        {% if data %}
+        <table>
+            <tr>
+                <th>Correo electrónico</th>
+                <th>Folio boleta</th>
+            </tr>
+            <tr>
+                <td>{{ data.correo }}</td>
+                <td>{{ data.folio }}</td>
+            </tr>
+        </table>
+        {% endif %}
     </form>
 </body>
 </html>

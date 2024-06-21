@@ -46,10 +46,10 @@ def PrepararImportarDataBoleta():
     except Exception as ex:
         print(ex)
 
-def buscarBoleta(folioBoleta, email):
-    sql = 'SELECT nombre, email, folioBoleta FROM masterbikes.usuarios WHERE folioBoleta = %s AND email = %s'
+def buscarBoleta(email):
+    sql = 'SELECT folioBoleta FROM masterbikes.usuarios WHERE email = %s'
     cur = conex.cursor()
-    cur.execute(sql,(folioBoleta, email,))
+    cur.execute(sql,(email,))
     boleta = cur.fetchone()
     cur.close()
     return boleta
