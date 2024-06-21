@@ -1,0 +1,50 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes de Problemas</title>
+    <style>
+        .demoTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .demoTable, .demoTable th, .demoTable td {
+            border: 1px solid black;
+        }
+        .demoTable th, .demoTable td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">
+        <span style="text-decoration: underline;">Reportes de problemas</span>
+    </h2>
+    <table class="demoTable">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Fecha y hora</th>
+                <th>tipo</th>
+                <th><span style="color: #c82828;">Reclamo/Problema</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>
+                    <ul>
+                        <li>{{ item.cliente }}</li>
+                    </ul>
+                </td>
+                <td>{{ item.fecha }}</td>
+                <td>{{ item.tipo }}</td>
+                <td>{{ item.problema }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

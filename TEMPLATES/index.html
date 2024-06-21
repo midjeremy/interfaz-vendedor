@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colaborador</title>
+</head>
+<body>
+    <style>
+        .contenedor{
+            text-align: center;
+        }
+        .mi-boton {
+            background-color: #199319;
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+        .images{
+            text-align: center;
+        }
+        .images li img{
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    <div class="contenedor">
+        <a class="mi-boton" href="/submit-PDF">Enviar PDF a la gerencia</a>
+        <a class="mi-boton" href="/enviar-ofertas">Enviar ofertas</a>
+        <a href="/agregar-producto" class="mi-boton">Agregar producto</a>
+        <a href="/crear-PDF" class="mi-boton">crear PDF</a>          
+        
+    </div>
+    <div class="contenedor">
+        <a href="/buscar-boleta" class="mi-boton">Buscar Boleta</a>
+    </div>
+    <div class="images">
+        {% for producto in productos %}
+        <li>
+            <h2>{{ producto[0] }}</h2>
+            <p>{{ producto[1] }}</p>
+            <img src="data:image/jpeg;base64,{{ producto[3] }}" alt="Imagen de {{ producto[0] }}">
+        </li>
+        {% endfor %}
+    </div>
+    
+    
+</body>
+</html>
