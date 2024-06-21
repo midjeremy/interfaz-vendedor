@@ -51,6 +51,7 @@ def submitPDF():
 
 @app.route('/buscar-boleta')
 def buscarBoleta():
+
     return render_template('buscarBoleta.html')
 
 
@@ -63,6 +64,7 @@ def crearPDF():
 @app.route('/agregar-producto', methods=['GET', 'POST'])
 def agregrarProducto():
     if request.method == 'POST':
+        PLU = request.form['PLU']
         nombre = request.form['producto']
         descripcion = request.form['Des-producto']
         precio = request.form['precio']
@@ -72,7 +74,7 @@ def agregrarProducto():
         if imagen and VerifiedIMG(imagen.filename):
             filename = secure_filename(imagen.filename)
             img = imagen.read()
-            agregarProductos(nombre,descripcion,precio,stock,img)
+            agregarProductos(PLU, nombre,descripcion,precio,stock,img)
             return redirect('/')
         elif imagen == '':
             error = 'Debes mandar alguna imagen'

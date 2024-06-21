@@ -35,10 +35,30 @@ def exportarDataJson(archivo, diccionario):
     except Exception as ex:
         resultData['Error'] = ex
 
-def agregarProductos(nombre, descripcion, precio, stock, img):
-    sql = "INSERT INTO productos (Nombre, Descripcion, Precio, Stock, images) VALUES (%s, %s, %s, %s, %s)"
+def PrepararImportarDataBoleta():
+    try:
+        cur = conex.cursor()
+        data = []
+        listData = []
+        dataDict = {}
+
+        cur.execute('select')
+    except Exception as ex:
+        print(ex)
+
+def buscarBoleta(folioBoleta, email):
+    sql = 'SELECT nombre, email, folioBoleta FROM masterbikes.usuarios WHERE folioBoleta = %s AND email = %s'
     cur = conex.cursor()
-    cur.execute(sql, (nombre, descripcion, precio, stock, img))
+    cur.execute(sql,(folioBoleta, email,))
+    boleta = cur.fetchone()
+    cur.close()
+    return boleta
+
+
+def agregarProductos(PLU, nombre, descripcion, precio, stock, img):
+    sql = "INSERT INTO productos (PLU, Nombre, Descripcion, Precio, Stock, images) VALUES (%s, %s, %s, %s, %s, %s)"
+    cur = conex.cursor()
+    cur.execute(sql, (PLU, nombre, descripcion, precio, stock, img))
     conex.commit()
     cur.close()
 
