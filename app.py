@@ -4,7 +4,11 @@ from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 from CONEX.Conex import conexion
 from CLASS.CreatePDF import CreatePDF
-import base64
+import random
+
+num1 = random.randint(1,2)
+
+
 
 
 rutaPDF = './TEMPLATES/'
@@ -78,6 +82,13 @@ def boletasClientes():
                 'productos': folio[2]}
         return render_template('elementosBoleta.html', data=data)
     return render_template('elementosBoleta.html')
+
+@app.route('/enviar-ofertas')
+def enviarOfertas():
+    if num1 == 1:
+        return
+    elif num1 == 2:
+        return
 
 @app.route('/crear-PDF', methods = ['GET'])
 def crearPDF():
