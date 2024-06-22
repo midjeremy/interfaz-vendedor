@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-from CRUD.crud import VerifiedPDF, agregarProductos, VerifiedIMG, buscarIMG, buscarBoleta
+from CRUD.crud import VerifiedPDF, agregarProductos, VerifiedIMG, buscarIMG, buscarBoleta, buscarElementoFolio
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 from CONEX.Conex import conexion
@@ -67,6 +67,17 @@ def buscarBoletasClientes():
 
     return render_template('buscarBoleta.html')
 
+@app.route('/buscar-elementos-boleta', methods=['GET', 'POST'])
+def boletasClientes():
+    if request.method == 'POST':
+        folioBoleta = request.form['folio']
+        folio = buscarElementoFolio(folioBoleta)
+
+        data = {'folio': folio[0],
+                'fecha': folio[1],
+                'productos': folio[2]}
+        return render_template('elementosBoleta.html', data=data)
+    return render_template('elementosBoleta.html')
 
 @app.route('/crear-PDF', methods = ['GET'])
 def crearPDF():

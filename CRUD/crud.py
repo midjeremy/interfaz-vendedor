@@ -35,21 +35,19 @@ def exportarDataJson(archivo, diccionario):
     except Exception as ex:
         resultData['Error'] = ex
 
-def PrepararImportarDataBoleta():
-    try:
-        cur = conex.cursor()
-        data = []
-        listData = []
-        dataDict = {}
-
-        cur.execute('select')
-    except Exception as ex:
-        print(ex)
 
 def buscarBoleta(email):
     sql = 'SELECT folioBoleta FROM masterbikes.usuarios WHERE email = %s'
     cur = conex.cursor()
     cur.execute(sql,(email,))
+    boleta = cur.fetchone()
+    cur.close()
+    return boleta
+
+def buscarElementoFolio(folioBoleta):
+    sql = 'SELECT * FROM boleta WHERE folioBoleta = %s'
+    cur = conex.cursor()
+    cur.execute(sql,(folioBoleta,))
     boleta = cur.fetchone()
     cur.close()
     return boleta
