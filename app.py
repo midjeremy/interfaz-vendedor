@@ -1,12 +1,12 @@
 from flask import Flask, render_template, redirect, url_for, request
-from CRUD.crud import VerifiedPDF, agregarProductos, VerifiedIMG, buscarIMG, buscarBoleta, buscarElementoFolio
+from CRUD.crud import VerifiedPDF, agregarProductos, VerifiedIMG, buscarIMG, buscarBoleta, buscarElementoFolio, ofertaCliente
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 from CONEX.Conex import conexion
 from CLASS.CreatePDF import CreatePDF
+from CLASS.sendEmail import SendEmail
 import random
 
-num1 = random.randint(1,2)
 
 
 
@@ -83,12 +83,35 @@ def boletasClientes():
         return render_template('elementosBoleta.html', data=data)
     return render_template('elementosBoleta.html')
 
+
+
 @app.route('/enviar-ofertas')
 def enviarOfertas():
+    lista = [1,2]
+    num1 = random.choice(lista)
     if num1 == 1:
-        return
+
+        cliente = []
+        for item in ofertaCliente():
+            cliente.append(item[0])
+            print(cliente)
+        
+        ofertas = ['masterbikes2024', 'cyberBikes','profe ponganos un 7']
+        ofertaAleatoria = random.choice(ofertas)
+        ofertaClienteRandom = random.choice(cliente)
+        SendEmail(ofertaClienteRandom, ofertaAleatoria, 'emailPY.html')
+        return redirect('/')
     elif num1 == 2:
-        return
+        cliente = []
+        for item in ofertaCliente():
+            cliente.append(item[0])
+            print(cliente)
+        
+        ofertas = ['masterbikes2024', 'cyberBikes','profe ponganos un 7']
+        ofertaAleatoria = random.choice(ofertas)
+        ofertaClienteRandom = random.choice(cliente)
+        SendEmail(ofertaClienteRandom, ofertaAleatoria, 'MantencionPromo.html')
+        return redirect('/')
 
 @app.route('/crear-PDF', methods = ['GET'])
 def crearPDF():

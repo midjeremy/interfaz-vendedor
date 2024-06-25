@@ -44,8 +44,16 @@ def buscarBoleta(email):
     cur.close()
     return boleta
 
+def ofertaCliente():
+    sql = 'SELECT email FROM usuarios'
+    cur = conex.cursor()
+    cur.execute(sql)
+    resultado = cur.fetchall()
+
+    return resultado
+
 def buscarElementoFolio(folioBoleta):
-    sql = 'SELECT * FROM boleta WHERE folioBoleta = %s'
+    sql = 'SELECT folioBoleta, fechaBoleta, productos FROM boleta WHERE folioBoleta = %s'
     cur = conex.cursor()
     cur.execute(sql,(folioBoleta,))
     boleta = cur.fetchone()
